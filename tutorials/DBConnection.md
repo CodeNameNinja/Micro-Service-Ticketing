@@ -44,3 +44,17 @@ spec:
       port: 27017 #Default Port for MongoDb
       targetPort: 27017
 ```
+
+then in
+
+> auth/src/index.ts
+
+```js
+import mongoose from "mongoose";
+```
+
+and to get it to work with `TS`
+
+```bash
+npm i @types/mongoose
+```

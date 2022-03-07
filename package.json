@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/CodeNameNinja/Micro-Service-Ticketing#readme",
   "dependencies": {
+    "@types/mongoose": "^5.11.97",
     "jsdoc": "^3.6.10",
     "mongoose": "^6.2.4"
   }
