@@ -1,0 +1,24 @@
+{
+  "name": "ticketing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "doc": "jsdoc -c jsdoc.json  "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeNameNinja/Micro-Service-Ticketing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CodeNameNinja/Micro-Service-Ticketing/issues"
+  },
+  "homepage": "https://github.com/CodeNameNinja/Micro-Service-Ticketing#readme",
+  "dependencies": {
+    "jsdoc": "^3.6.10",
+    "mongoose": "^6.2.4"
+  }
+}
