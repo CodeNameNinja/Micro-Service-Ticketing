@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import { Password } from "../services/password";
 /**
  * UserAttrs
  * An Interface that describes the properties that are required to create a new User
@@ -22,7 +22,7 @@ interface UserModel extends mongoose.Model<UserDoc> {
  * An Interface that describes the properties that a User Document has
  * @extends mongoose.Document
  */
-interface UserDoc extends mongoose.Document{
+interface UserDoc extends mongoose.Document {
   email: string;
   password: string;
 }
