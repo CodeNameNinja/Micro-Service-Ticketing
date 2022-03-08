@@ -10,6 +10,7 @@ import { signupRouter } from "./routes/signup";
 
 import { errorHandler } from "./middelwares/error-handler";
 import { NotFoundError } from "./errors/not-found-error";
+import { DatabaseConnectionError } from "./errors/database-connection-error";
 const app = express();
 app.use(json());
 
@@ -24,6 +25,17 @@ app.all("*", async () => {
 
 app.use(errorHandler);
 
+const start = async () => {
+  try {
+    await mongoose.connect("mongodb://auth-mongo-srv:27017/auth");
+    console.log("Connected to MongoDB");
+  } catch (err) {
+    throw new DatabaseConnectionError();
+  }
+};
+
 app.listen(3000, () => {
   console.log("Server is running on port 3000!!!!");
 });
+
+start();

@@ -58,3 +58,27 @@ and to get it to work with `TS`
 ```bash
 npm i @types/mongoose
 ```
+
+### Connecting to a mongoDB instance
+
+> auth/src/index.ts
+
+```js
+app.use(errorHandler);
+
+// Connection to MongoDB
+
+const start = async () => {
+  try {
+    await mongoose.connect("mongodb://auth-mongo-srv:27017/auth");
+  } catch (err) {
+    throw new DatabaseConnectionError();
+  }
+};
+
+app.listen(3000, () => {
+  console.log("Server is running on port 3000!!!!");
+});
+
+start();
+```
