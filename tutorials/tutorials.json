@@ -1,5 +1,8 @@
 {
   "DBConnection": {
-    "title": "Connecting Database to Kurbenetes" 
+    "title": "Connecting Database to Kurbenetes"
+  },
+  "AddEnviromentVariables": {
+    "title": "Add Enviroment Variables"
   }
 }
