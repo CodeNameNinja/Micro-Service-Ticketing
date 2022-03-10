@@ -13,20 +13,18 @@ spec:
         app: auth-mongo
     spec:
       containers:
-      - name: auth-mongo
-        image: mongo
-
+        - name: auth-mongo
+          image: mongo
 ---
 apiVersion: v1
 kind: Service
-metadata: 
+metadata:
   name: auth-mongo-srv
 spec:
-  type: ClusterIP
   selector:
     app: auth-mongo
   ports:
-  - name: db
-    protocol: TCP
-    port: 27017 #Default Port for MongoDb
-    targetPort: 27017
+    - name: db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017

@@ -1,7 +1,10 @@
 import express, { Request, Response } from "express";
-import { body, validationResult } from "express-validator";
-import { RequestValidationError } from "../errors/request-validation-error";
+import { body} from "express-validator";
+import { BadRequestError } from "../errors/bad-request-error";
 import { validateRequest } from "../middelwares/validate-request";
+import { User } from "../models/user";
+import { Password } from "../services/password";
+import jwt from "jsonwebtoken";
 const router = express.Router();
 
 router.post(
@@ -11,13 +14,38 @@ router.post(
     body("password").trim().notEmpty().withMessage("Password is required"),
     validateRequest,
   ],
-  (req: Request, res: Response) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      throw new RequestValidationError(errors.array());
-    }
+  async (req: Request, res: Response) => {
     const { email, password } = req.body;
-    res.send("Hi there");
+
+    // check for existing user
+    const existingUser = await User.findOne({ email });
+    if (!existingUser) {
+      throw new BadRequestError("Invalid credentials");
+    }
+    // compare password
+    const passwordMatch = await Password.compare(
+      existingUser.password,
+      password
+    );
+    if (!passwordMatch) {
+      throw new BadRequestError("Invalid credentials");
+    }
+
+    // Generate JWT
+
+    const userJwt = jwt.sign(
+      {
+        id: existingUser.id,
+        email: existingUser.email,
+      },
+      process.env.JWT_KEY!
+    );
+
+    // Store it on session object
+    req.session = {
+      jwt: userJwt,
+    };
+    res.status(200).send(existingUser);
   }
 );
 
