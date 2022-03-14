@@ -3,27 +3,7 @@ import { app } from "../../app";
 
 // response with details about the current user
 it("responds with details about the current user", async () => {
-  // const cookie = await global.signin();
-
-  //signup user
-  const authResponse = await request(app)
-    .post("/api/users/signup")
-    .send({
-      email: "test@test.com",
-      password: "password",
-    })
-    .expect(201);
-
-  const cookie = authResponse.get("Set-Cookie");
-
-  //signin user
-  await request(app)
-    .post("/api/users/signin")
-    .send({
-      email: "test@test.com",
-      password: "password",
-    })
-    .expect(200);
+  const cookie = await global.signin();
 
   //get current user
   const response = await request(app)
@@ -33,4 +13,14 @@ it("responds with details about the current user", async () => {
     .expect(200);
 
   expect(response.body.currentUser.email).toEqual("test@test.com");
+});
+
+// response with null if not authenticated
+it("responds with null if not authenticated", async () => {
+  const response = await request(app)
+    .get("/api/users/currentuser")
+    .send()
+    .expect(200);
+
+  expect(response.body.currentUser).toEqual(null);
 });
