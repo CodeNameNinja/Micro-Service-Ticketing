@@ -1,10 +1,13 @@
-import { MongoMemoryServer } from 'mongodb-memory-server';
-import mongoose from 'mongoose';
-import { app } from '../app';
+import { MongoMemoryServer } from "mongodb-memory-server";
+import mongoose from "mongoose";
+import { app } from "../app";
 
 let mongo: any;
+declare global {
+  var signin: () => Promise<string[]>;
+}
 beforeAll(async () => {
-  process.env.JWT_KEY = 'asdfasdf';
+  process.env.JWT_KEY = "asdfasdf";
   process.env.NODE_ENV = "test";
   mongo = new MongoMemoryServer();
   await mongo.start();
