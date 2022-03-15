@@ -24,3 +24,9 @@ build:
         manual:
           - src: "pages/**/*.js"
             dest: .
+          - src: "components/**/*.js"
+            dest: .
+          - src: "hooks/**/*.js"
+            dest: .
+          - src: "api/**/*.js"
+            dest: .
