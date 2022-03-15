@@ -2,4 +2,4 @@
 
 
 ## Tutorials
-[Link](https://codenameninja.github.io/Micro-Service-Ticketing/)
+[Link](https://channelmobile.github.io/Channel360/)
