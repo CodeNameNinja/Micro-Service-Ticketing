@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-export default ({ url, method, body }) => {
+export default ({ url, method, body, onSuccess }) => {
   const [data, setData] = useState(null);
   const [errors, setErrors] = useState([]);
 
@@ -14,6 +14,9 @@ export default ({ url, method, body }) => {
       });
       setData(response.data);
       setErrors(null);
+      if (onSuccess) {
+        onSuccess(data);
+      }
     } catch (error) {
       setErrors(
         <div className="alert alert-danger">
