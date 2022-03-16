@@ -16,17 +16,23 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: codenameninja/client
-      context: client
+    - image: codenameninja/container
+      context: frontend/container
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "pages/**/*.js"
+          - src: "src/**/*.js"
             dest: .
-          - src: "components/**/*.js"
+          - src: "public/**/*.html"
             dest: .
-          - src: "hooks/**/*.js"
+    - image: codenameninja/marketing
+      context: frontend/marketing
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.js"
             dest: .
-          - src: "api/**/*.js"
+          - src: "public/**/*.html"
             dest: .
