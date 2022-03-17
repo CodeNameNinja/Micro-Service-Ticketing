@@ -1,0 +1,16 @@
+version: '3'
+services:
+  container-app:
+    image: codenameninja/container
+    build:
+      context: ./container
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+  marketing:
+    image: codenameninja/marketing
+    build:
+      context: ./marketing
+      dockerfile: Dockerfile
+    ports:
+      - "8081:80"

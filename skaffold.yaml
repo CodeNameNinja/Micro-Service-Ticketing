@@ -36,3 +36,16 @@ build:
             dest: .
           - src: "public/**/*.html"
             dest: .
+    - image: codenameninja/client
+      context: frontend/client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "components/**/*.js"
+            dest: .
+          - src: "pages/**/*.js"
+            dest: .
+          - src: "hooks/**/*.js"
+            dest: .
+          
