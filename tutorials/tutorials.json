@@ -4,5 +4,8 @@
   },
   "AddEnviromentVariables": {
     "title": "Add Enviroment Variables"
+  },
+  "DeployingToAWS": {
+    "title": "Deploying to AWS"
   }
 }

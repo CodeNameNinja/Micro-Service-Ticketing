@@ -20,11 +20,11 @@ const devConfig = {
       name: "container",
       remotes: {
         marketing:
-          "marketing@https://0.0.0.0:8081/remoteEntry.js",
+          "marketing@http://localhost:8081/remoteEntry.js",
       },
       shared: packageJson.dependencies,
     }),
   ],
 };
-
 module.exports = merge(commonConfig, devConfig);
+
