@@ -7,6 +7,8 @@ on:
     paths:
       - 'frontend/marketing/**'
 
+  workflow_dispatch:
+
 defaults:
   run:
     working-directory: frontend/marketing
