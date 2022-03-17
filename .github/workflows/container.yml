@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'frontend/container/**'
+      - '.github/workflows/cotnainer.yml'
 
   workflow_dispatch:
 
