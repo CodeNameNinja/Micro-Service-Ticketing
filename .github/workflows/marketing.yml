@@ -4,7 +4,7 @@ on:
   push:
     branches: ['main']
     paths:
-      - 'frontend/marketing/**'
+      - '.github/workflows/marketing/**'
 
   workflow_dispatch:
 
