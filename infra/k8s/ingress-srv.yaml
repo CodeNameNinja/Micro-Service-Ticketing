@@ -28,9 +28,16 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: container-srv
+                name: client-srv
                 port:
-                  number: 8080
+                  number: 3000
+          # - path: /?(.*)
+          #   pathType: Prefix
+          #   backend:
+          #     service:
+          #       name: container-srv
+          #       port:
+          #         number: 8080
 
 
 # YAML data

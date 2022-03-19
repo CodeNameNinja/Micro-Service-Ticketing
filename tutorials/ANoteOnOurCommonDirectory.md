@@ -153,3 +153,12 @@ The command is a quick command to update our package, and publish it to NPM.
 ```bash
 npm run pub
 ```
+
+### Update package
+
+in the project where we have installed our package, run this command to update the package.
+
+> e.g /app
+```bash
+npm update @channel360/common
+```
