@@ -18,16 +18,6 @@
   },
   "homepage": "https://github.com/CodeNameNinja/Micro-Service-Ticketing#readme",
   "dependencies": {
-    "@types/mongoose": "^5.11.97",
-    "jsdoc": "^3.6.10",
-    "mongoose": "^6.2.4"
-  },
-  "devDependencies": {
-    "@types/jest": "^27.4.1",
-    "@types/supertest": "^2.0.11",
-    "jest": "^27.5.1",
-    "mongodb-memory-server": "^8.4.0",
-    "supertest": "^6.2.2",
-    "ts-jest": "^27.1.3"
+    "jsdoc": "^3.6.10"
   }
 }
