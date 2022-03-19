@@ -7,5 +7,11 @@
   },
   "DeployingToAWS": {
     "title": "Deploying to AWS"
+  },
+  "PublishingAPackageToNPM": {
+    "title": "Publishing a package to NPM"
+  },
+  "ANoteOnOurCommonDirectory": {
+    "title": "A Note on our Common Directory"
   }
 }

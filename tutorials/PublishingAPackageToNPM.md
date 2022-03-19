@@ -27,4 +27,10 @@ and set a remote called `common` to publish our changes for our common folder.
 
 ```bash
 
+npm publish --access public
+
 ```
+> we are publishing as public for now, and we convert the orginization to private at a later stage
+
+! If you see an error immediatly after running that command, and it's says something like add user or login. 
+type `npm login` and follow the instructions.

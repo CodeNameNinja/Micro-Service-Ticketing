@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Tutorial: A Note on our Common Directory</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Tutorial: A Note on our Common Directory</h1>
+
+    <section>
+
+<header>
+    
+
+    <h2>A Note on our Common Directory</h2>
+</header>
+
+<article>
+    <p>We will be writing our common files in <code>Typescript</code> but they will be published as <code>Javascript</code></p>
+<p>in our common directory. <code>/common</code></p>
+<pre class="prettyprint source lang-bash"><code>tsc --init
+
+npm install typescript del-cli --save-dev
+</code></pre>
+<p>In our <code>/common</code> directory, we are going to create a subdirectory called <code>src</code> and inside that a <code>index.ts</code> file that we are going to try and convert to JS and publish as an example.</p>
+<p><code>/common/src/index.ts</code></p>
+<pre class="prettyprint source lang-ts"><code>interface Color {
+  red: number;
+  blue: number;
+  green: number;
+}
+
+const color: Color = {
+  red: 10,
+  blue: 10,
+  green: 10,
+};
+
+export default color; 
+</code></pre>
+<p><code>tsconfig.json</code></p>
+<pre class="prettyprint source lang-json"><code>{
+  &quot;compilerOptions&quot;: {
+    /* Visit https://aka.ms/tsconfig.json to read more about this file */
+
+    /* Basic Options */
+    // &quot;incremental&quot;: true,                         /* Enable incremental compilation */
+    &quot;target&quot;: &quot;es5&quot;,                                /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', 'ES2021', or 'ESNEXT'. */
+    &quot;module&quot;: &quot;commonjs&quot;,                           /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
+    // &quot;lib&quot;: [],                                   /* Specify library files to be included in the compilation. */
+    // &quot;allowJs&quot;: true,                             /* Allow javascript files to be compiled. */
+    // &quot;checkJs&quot;: true,                             /* Report errors in .js files. */
+    // &quot;jsx&quot;: &quot;preserve&quot;,                           /* Specify JSX code generation: 'preserve', 'react-native', 'react', 'react-jsx' or 'react-jsxdev'. */
+    &quot;declaration&quot;: true,                         /* Generates corresponding '.d.ts' file. */
+    // &quot;declarationMap&quot;: true,                      /* Generates a sourcemap for each corresponding '.d.ts' file. */
+    // &quot;sourceMap&quot;: true,                           /* Generates corresponding '.map' file. */
+    // &quot;outFile&quot;: &quot;./&quot;,                             /* Concatenate and emit output to single file. */
+    &quot;outDir&quot;: &quot;./build&quot;,                              /* Redirect output structure to the directory. */
+    // &quot;rootDir&quot;: &quot;./&quot;,                             /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
+    // &quot;composite&quot;: true,                           /* Enable project compilation */
+    // &quot;tsBuildInfoFile&quot;: &quot;./&quot;,                     /* Specify file to store incremental compilation information */
+    // &quot;removeComments&quot;: true,                      /* Do not emit comments to output. */
+    // &quot;noEmit&quot;: true,                              /* Do not emit outputs. */
+    // &quot;importHelpers&quot;: true,                       /* Import emit helpers from 'tslib'. */
+    // &quot;downlevelIteration&quot;: true,                  /* Provide full support for iterables in 'for-of', spread, and destructuring when targeting 'ES5' or 'ES3'. */
+    // &quot;isolatedModules&quot;: true,                     /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */
+
+    /* Strict Type-Checking Options */
+    &quot;strict&quot;: true,                                 /* Enable all strict type-checking options. */
+    // &quot;noImplicitAny&quot;: true,                       /* Raise error on expressions and declarations with an implied 'any' type. */
+    // &quot;strictNullChecks&quot;: true,                    /* Enable strict null checks. */
+    // &quot;strictFunctionTypes&quot;: true,                 /* Enable strict checking of function types. */
+    // &quot;strictBindCallApply&quot;: true,                 /* Enable strict 'bind', 'call', and 'apply' methods on functions. */
+    // &quot;strictPropertyInitialization&quot;: true,        /* Enable strict checking of property initialization in classes. */
+    // &quot;noImplicitThis&quot;: true,                      /* Raise error on 'this' expressions with an implied 'any' type. */
+    // &quot;alwaysStrict&quot;: true,                        /* Parse in strict mode and emit &quot;use strict&quot; for each source file. */
+
+    /* Additional Checks */
+    // &quot;noUnusedLocals&quot;: true,                      /* Report errors on unused locals. */
+    // &quot;noUnusedParameters&quot;: true,                  /* Report errors on unused parameters. */
+    // &quot;noImplicitReturns&quot;: true,                   /* Report error when not all code paths in function return a value. */
+    // &quot;noFallthroughCasesInSwitch&quot;: true,          /* Report errors for fallthrough cases in switch statement. */
+    // &quot;noUncheckedIndexedAccess&quot;: true,            /* Include 'undefined' in index signature results */
+    // &quot;noImplicitOverride&quot;: true,                  /* Ensure overriding members in derived classes are marked with an 'override' modifier. */
+    // &quot;noPropertyAccessFromIndexSignature&quot;: true,  /* Require undeclared properties from index signatures to use element accesses. */
+
+    /* Module Resolution Options */
+    // &quot;moduleResolution&quot;: &quot;node&quot;,                  /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+    // &quot;baseUrl&quot;: &quot;./&quot;,                             /* Base directory to resolve non-absolute module names. */
+    // &quot;paths&quot;: {},                                 /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
+    // &quot;rootDirs&quot;: [],                              /* List of root folders whose combined content represents the structure of the project at runtime. */
+    // &quot;typeRoots&quot;: [],                             /* List of folders to include type definitions from. */
+    // &quot;types&quot;: [],                                 /* Type declaration files to be included in compilation. */
+    // &quot;allowSyntheticDefaultImports&quot;: true,        /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
+    &quot;esModuleInterop&quot;: true,                        /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
+    // &quot;preserveSymlinks&quot;: true,                    /* Do not resolve the real path of symlinks. */
+    // &quot;allowUmdGlobalAccess&quot;: true,                /* Allow accessing UMD globals from modules. */
+
+    /* Source Map Options */
+    // &quot;sourceRoot&quot;: &quot;&quot;,                            /* Specify the location where debugger should locate TypeScript files instead of source locations. */
+    // &quot;mapRoot&quot;: &quot;&quot;,                               /* Specify the location where debugger should locate map files instead of generated locations. */
+    // &quot;inlineSourceMap&quot;: true,                     /* Emit a single file with source maps instead of having a separate file. */
+    // &quot;inlineSources&quot;: true,                       /* Emit the source alongside the sourcemaps within a single file; requires '--inlineSourceMap' or '--sourceMap' to be set. */
+
+    /* Experimental Options */
+    // &quot;experimentalDecorators&quot;: true,              /* Enables experimental support for ES7 decorators. */
+    // &quot;emitDecoratorMetadata&quot;: true,               /* Enables experimental support for emitting type metadata for decorators. */
+
+    /* Advanced Options */
+    &quot;skipLibCheck&quot;: true,                           /* Skip type checking of declaration files. */
+    &quot;forceConsistentCasingInFileNames&quot;: true        /* Disallow inconsistently-cased references to the same file. */
+  }
+}
+
+}
+</code></pre>
+<p>in our <code>package.json</code> file.
+change the following script section to.</p>
+<pre class="prettyprint source lang-json"><code>  &quot;scripts&quot;: {
+    // del for unix - del-cli for windows
+    &quot;clean&quot;: &quot;del-cli ./build/*&quot;,
+    &quot;build&quot;: &quot;npm run clean && tsc&quot;
+  },
+</code></pre>
+<blockquote>
+<p>The <code>clean</code> script, delete's our build directory so that we know it's <strong>clean</strong>.</p>
+</blockquote>
+<p>and then run it.</p>
+<pre class="prettyprint source lang-bash"><code>npm run build
+</code></pre>
+<h4>Additional Config in package.json</h4>
+<pre class="prettyprint source lang-json"><code>  &quot;name&quot;: &quot;@channel360/common&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;main&quot;: &quot;./build/index.js&quot;,
+  &quot;types&quot;: &quot;./build/index.d.ts&quot;,
+  &quot;files&quot;: [
+    &quot;build/**/*&quot;
+  ],
+</code></pre>
+<h3>Publish to NPM command</h3>
+<p>In our <code>package.json</code> file, I created a new command, called <code>pub</code>.</p>
+<p>The command is a quick command to update our package, and publish it to NPM.</p>
+<blockquote>
+<p>You can run each of these  steps individually in the terminal if you want a custom commit and patch number.</p>
+</blockquote>
+<pre class="prettyprint source lang-json"><code>&quot;pub&quot;: &quot;git add . && git commit -m\&quot;Updates\&quot; && npm version patch && npm run build && npm publish&quot;
+</code></pre>
+<pre class="prettyprint source lang-bash"><code>npm run pub
+</code></pre>
+</article>
+
+</section>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Tutorials</h3><ul><li><a href="tutorial-AddEnviromentVariables.html">Add Enviroment Variables</a></li><li><a href="tutorial-ANoteOnOurCommonDirectory.html">A Note on our Common Directory</a></li><li><a href="tutorial-DBConnection.html">Connecting Database to Kurbenetes</a></li><li><a href="tutorial-DeployingToAWS.html">Deploying to AWS</a></li><li><a href="tutorial-PublishingAPackageToNPM.html">Publishing a package to NPM</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Sat Mar 19 2022 11:14:47 GMT+0200 (South Africa Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
