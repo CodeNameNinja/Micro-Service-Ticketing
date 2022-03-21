@@ -48,4 +48,11 @@ build:
             dest: .
           - src: "hooks/**/*.js"
             dest: .
-          
+    - image: codenameninja/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
