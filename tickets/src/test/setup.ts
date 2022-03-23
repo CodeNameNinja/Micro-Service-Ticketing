@@ -11,7 +11,7 @@ beforeAll(async () => {
   mongo = new MongoMemoryServer();
   await mongo.start();
   const mongoUri = await mongo.getUri();
-  await mongoose.connect(mongoUri);
+  await mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
 });
 
 beforeEach(async () => {
@@ -34,7 +34,7 @@ global.signin = () => {
 
   // Build a JWT payload. {id, email}
   const payload = {
-    id: '1askldfnl',
+    id: mongoose.Types.ObjectId().toHexString(),
     email: "test@test.com"
   }
   // Create a JWT!
