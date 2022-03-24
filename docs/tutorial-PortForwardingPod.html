@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Tutorial: Deploying to AWS</title>
+    <title>JSDoc: Tutorial: Port Forwarding Pod</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,20 +17,33 @@
 
 <div id="main">
 
-    <h1 class="page-title">Tutorial: Deploying to AWS</h1>
+    <h1 class="page-title">Tutorial: Port Forwarding Pod</h1>
 
     <section>
 
 <header>
     
 
-    <h2>Deploying to AWS</h2>
+    <h2>Port Forwarding Pod</h2>
 </header>
 
 <article>
-    <p>Each Micro-frontend will be deployed individually to AWS.</p>
-<p>We are going to push our code to Github, where a CI trigger will automatically deploy our code to AWS S3 and Cloudfront.</p>
-<p>Amazon Cloudfront is a CDN that will serve our static files to the Client's browser.</p>
+    <h3>Command to Port forward a Pod.</h3>
+<pre class="prettyprint source lang-bash"><code>kubectl get pods
+
+auth-depl-dc69df8b9-9czqf           1/1     Running   0          38m
+auth-mongo-depl-7667b8bc7f-hvz2v    1/1     Running   0          38m
+client-depl-5554c7896c-vrmzb        1/1     Running   0          38m
+nats-depl-5f44cf96f-g5pgh           1/1     Running   0          38m
+tickets-depl-56579778-855sg         1/1     Running   0          38m
+tickets-mongo-depl-ffc7d855-62stk   1/1     Running   0          38m
+
+kubectl port-forward nats-depl-5f44cf96f-g5pgh 4222:4222
+
+Forwarding from 127.0.0.1:4222 -> 4222
+Forwarding from [::1]:4222 -> 4222
+</code></pre>
+<p>the first port is the port on your local machine that you want to access to get to the pod. the second port is the port on the pod thtyou want to access.</p>
 </article>
 
 </section>
