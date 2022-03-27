@@ -16,4 +16,8 @@ stan.on('connect', () => {
     title: 'concert',
     price: 20
   }));
+
+  stan.on('publish', () => {
+    console.log('Event published!');
+  })
 })

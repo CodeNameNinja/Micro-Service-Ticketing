@@ -1,7 +1,7 @@
 The command to creating a `Secret` Object in our Kubernets Pod is the following:
 
 ```bash
-> kubectl create secret generic jwt-secret --from-literal=secret=JWT_KEY=asdf
+> kubectl create secret generic jwt-secret --from-literal=JWT_KEY=asdf
 secret/jwt-secret created
 ```
 
