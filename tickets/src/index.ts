@@ -12,7 +12,18 @@ const start = async () => {
   }
 
   try {
-    await natsWrapper.connect("ticketing", "abs", "http://nats-srv:4222")
+    await natsWrapper.connect("ticketing", "abs", "http://nats-srv:4222");
+    // Graceful shutdown
+    natsWrapper.client.on("close", () => {
+      console.log("NATS connection closed");
+      process.exit();
+    });
+
+    // Interupt node service
+    process.on("SIGINT", () => natsWrapper.client.close());
+    // Close node service
+    process.on("SIGTERM", () => natsWrapper.client.close());
+
     await mongoose.connect(process.env.MONGO_URI!, {
       useNewUrlParser: true,
       useUnifiedTopology: true,

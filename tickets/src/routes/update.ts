@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import { NotAuthorizedError, NotFoundError, requireAuth, validateRequest } from "@channel360/common";
 import { body } from "express-validator";
 import { Ticket } from "../models/ticket";
+import { TicketUpdatedPublisher } from "../events/publishers/ticket-updated-publisher";
+import { natsWrapper } from "../nats-wrapper";
 const router = express.Router();
 
 // Update Ticket
@@ -29,7 +31,14 @@ router.put(
     }
     ticket.set({ title, price });
     await ticket.save();
-    res.sendStatus(200).send(ticket);
+    await new TicketUpdatedPublisher(natsWrapper.client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
+    });
+
+    res.send(ticket);
   }
 );
 
