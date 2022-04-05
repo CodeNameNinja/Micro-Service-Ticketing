@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import { OrderStatus } from "@channel360/common";
 import { TicketDoc } from "./ticket";
+
+export { OrderStatus };
 interface OrderAttrs {
   userId: string;
   status: OrderStatus;
