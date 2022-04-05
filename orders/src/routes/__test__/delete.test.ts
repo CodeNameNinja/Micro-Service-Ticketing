@@ -3,7 +3,9 @@ import request from "supertest";
 import { app } from "../../app";
 import { Order, OrderStatus } from "../../models/order";
 import { Ticket } from "../../models/ticket";
+import { natsWrapper } from "../../nats-wrapper";
 
+jest.mock("../../nats-wrapper.ts");
 it('returns an error if user does not own the order', async () => {
   const ticket = Ticket.build({
     title: "concert",
@@ -49,3 +51,5 @@ it('cancels an order', async () => {
   expect(updatedOrder!.status).toEqual(OrderStatus.Cancelled);
 
 })
+
+it.todo('emits an Order Cancelled event');

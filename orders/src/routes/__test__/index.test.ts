@@ -3,7 +3,9 @@ import request from "supertest";
 import { app } from "../../app";
 import { Order, OrderStatus } from "../../models/order";
 import { Ticket } from "../../models/ticket";
+import { natsWrapper } from "../../nats-wrapper";
 
+jest.mock("../../nats-wrapper.ts");
 const buildTicket = () => {
   return Ticket.build({
     title: "concert",

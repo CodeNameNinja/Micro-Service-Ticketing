@@ -5,6 +5,8 @@ import {
   requireAuth,
 } from "@channel360/common";
 import { Order, OrderStatus } from "../models/order";
+import { OrderCancelledPublisher } from "../events/order-cancelled-publisher";
+import { natsWrapper } from "../nats-wrapper";
 const router = express.Router();
 
 router.delete(
@@ -21,6 +23,16 @@ router.delete(
 
     order.status = OrderStatus.Cancelled;
     await order.save();
+
+    // Send Order Cancel Event.
+    new OrderCancelledPublisher(natsWrapper.client).publish({
+      id: order.id,
+      ticket: {
+        id: order.ticket.id,
+      },
+    });
+
+
     res.status(204).send(order);
   }
 );
