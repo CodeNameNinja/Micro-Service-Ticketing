@@ -57,7 +57,7 @@ build:
           - src: "src/**/*.ts"
             dest: .
     - image: codenameninja/orders
-      context: tickets
+      context: orders
       docker:
         dockerfile: Dockerfile
       sync:
