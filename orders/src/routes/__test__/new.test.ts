@@ -49,3 +49,5 @@ it("reserves a ticket", () => {
       .expect(201);
   });
 });
+
+it.todo('emits an order created event');
