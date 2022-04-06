@@ -3,6 +3,7 @@ import { Order, OrderStatus } from "./order";
 interface TicketAttrs {
   title: string;
   price: number;
+  id: string;
 }
 
 export interface TicketDoc extends mongoose.Document {
@@ -15,7 +16,7 @@ interface TicketModel extends mongoose.Model<TicketDoc> {
   build(attrs: TicketAttrs): TicketDoc;
 }
 
-const ticketSchema = new mongoose.Schema<TicketDoc>(
+const ticketSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -38,7 +39,11 @@ const ticketSchema = new mongoose.Schema<TicketDoc>(
 );
 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
-  return new Ticket(attrs);
+  return new Ticket({
+    _id: attrs.id,  
+    title: attrs.title, 
+    price: attrs.price
+  });
 };
 // Run query to look at all orders. Find an order where the ticket
 // is the ticket we just found *and* the orders status is *not* cancelled.
@@ -46,7 +51,7 @@ ticketSchema.statics.build = (attrs: TicketAttrs) => {
 ticketSchema.methods.isReserved = async function () {
   // this === the ticket document that we just called 'isReserved' on
   const existingOrder = await Order.findOne({
-    ticket: this,
+    ticket: this as any,
     status: {
       $in: [
         OrderStatus.Created,
