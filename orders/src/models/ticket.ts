@@ -1,14 +1,17 @@
-import mongoose from "mongoose";
-import { Order, OrderStatus } from "./order";
+import mongoose from 'mongoose';
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
+import { Order, OrderStatus } from './order';
+
 interface TicketAttrs {
+  id: string;
   title: string;
   price: number;
-  id: string;
 }
 
 export interface TicketDoc extends mongoose.Document {
   title: string;
   price: number;
+  version: number;
   isReserved(): Promise<boolean>;
 }
 
@@ -25,6 +28,7 @@ const ticketSchema = new mongoose.Schema(
     price: {
       type: Number,
       required: true,
+      min: 0,
     },
   },
   {
@@ -32,22 +36,21 @@ const ticketSchema = new mongoose.Schema(
       transform(doc, ret) {
         ret.id = ret._id;
         delete ret._id;
-        delete ret.__v;
       },
     },
   }
 );
 
+ticketSchema.set('versionKey', 'version');
+ticketSchema.plugin(updateIfCurrentPlugin);
+
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
   return new Ticket({
-    _id: attrs.id,  
-    title: attrs.title, 
-    price: attrs.price
+    _id: attrs.id,
+    title: attrs.title,
+    price: attrs.price,
   });
 };
-// Run query to look at all orders. Find an order where the ticket
-// is the ticket we just found *and* the orders status is *not* cancelled.
-// if we find an order from that, it means the ticket *is* reserved
 ticketSchema.methods.isReserved = async function () {
   // this === the ticket document that we just called 'isReserved' on
   const existingOrder = await Order.findOne({
@@ -60,9 +63,10 @@ ticketSchema.methods.isReserved = async function () {
       ],
     },
   });
+
   return !!existingOrder;
 };
 
-const Ticket = mongoose.model<TicketDoc, TicketModel>("Ticket", ticketSchema);
+const Ticket = mongoose.model<TicketDoc, TicketModel>('Ticket', ticketSchema);
 
 export { Ticket };

@@ -1,8 +1,9 @@
-import mongoose from "mongoose";
-import { OrderStatus } from "@channel360/common";
-import { TicketDoc } from "./ticket";
+import mongoose from 'mongoose';
+import { OrderStatus } from '@channel360/common';
+import { TicketDoc } from './ticket';
 
 export { OrderStatus };
+
 interface OrderAttrs {
   userId: string;
   status: OrderStatus;
@@ -15,6 +16,7 @@ interface OrderDoc extends mongoose.Document {
   status: OrderStatus;
   expiresAt: Date;
   ticket: TicketDoc;
+  version: number;
 }
 
 interface OrderModel extends mongoose.Model<OrderDoc> {
@@ -38,7 +40,7 @@ const orderSchema = new mongoose.Schema(
     },
     ticket: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Ticket",
+      ref: 'Ticket',
     },
   },
   {
@@ -55,6 +57,6 @@ orderSchema.statics.build = (attrs: OrderAttrs) => {
   return new Order(attrs);
 };
 
-const Order = mongoose.model<OrderDoc, OrderModel>("Order", orderSchema);
+const Order = mongoose.model<OrderDoc, OrderModel>('Order', orderSchema);
 
 export { Order };
