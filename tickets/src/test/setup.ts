@@ -5,6 +5,7 @@ let mongo: any;
 declare global {
   var signin: () => string[];
 }
+jest.setTimeout(30000);
 beforeAll(async () => {
   process.env.JWT_KEY = "asdfasdf";
   process.env.NODE_ENV = "test";
