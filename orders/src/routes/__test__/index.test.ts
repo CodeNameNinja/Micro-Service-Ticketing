@@ -8,6 +8,7 @@ import { natsWrapper } from "../../nats-wrapper";
 jest.mock("../../nats-wrapper.ts");
 const buildTicket = () => {
   return Ticket.build({
+    id: mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });

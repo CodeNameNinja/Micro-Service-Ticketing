@@ -8,6 +8,7 @@ import { natsWrapper } from "../../nats-wrapper";
 jest.mock("../../nats-wrapper.ts");
 it('returns an error if user does not own the order', async () => {
   const ticket = Ticket.build({
+    id: mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });
@@ -31,6 +32,7 @@ it('fetches the order', async () => {
   const cookie = global.signin();
   // Create a ticket 
   const ticket = Ticket.build({
+    id: mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });

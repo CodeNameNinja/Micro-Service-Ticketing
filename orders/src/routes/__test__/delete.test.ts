@@ -8,6 +8,7 @@ import { natsWrapper } from "../../nats-wrapper";
 jest.mock("../../nats-wrapper.ts");
 it('returns an error if user does not own the order', async () => {
   const ticket = Ticket.build({
+    id: mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });
@@ -29,6 +30,7 @@ it('returns an error if user does not own the order', async () => {
 
 it('cancels an order', async () => {
   const ticket = Ticket.build({
+    id: mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });
@@ -55,6 +57,7 @@ it('cancels an order', async () => {
 it('emits an Order Cancelled event', async () => {
   
   const ticket = Ticket.build({
+    id: mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });
